@@ -319,7 +319,7 @@ async def delallconfirm(client, message):
 async def give_filter(client,message):
     group_id = message.chat.id
     name = message.text
-    if(name.startsWith("DEBUG:")):
+    if(name.startswith("DEBUG:")):
         await message.reply_text(name, quote=True)
 
     keywords = await get_filters(group_id)
