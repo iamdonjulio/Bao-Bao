@@ -11,16 +11,17 @@ BTN_URL_REGEX = re.compile(
 
 SMART_OPEN = '“'
 SMART_CLOSE = '”'
+TAG_OPEN = '<'
+TAG_CLOSE = '>'
 START_CHAR = ('\'', '"', SMART_OPEN)
 
-
-def split_quotes(text: str) -> List:
-    if any(text.startswith(char) for char in START_CHAR):
+def split_quotes(text: str) -> list:
+    if any(text.startswith(char) for char in START_CHAR) or text[0:3].lower()=="<a ":
         counter = 1  # ignore first char -> is some kind of quote
         while counter < len(text):
             if text[counter] == "\\":
                 counter += 1
-            elif text[counter] == text[0] or (text[0] == SMART_OPEN and text[counter] == SMART_CLOSE):
+            elif text[counter] == text[0] or (text[0] == SMART_OPEN and text[counter] == SMART_CLOSE) or (text[0]==TAG_OPEN and text[counter]==TAG_CLOSE):
                 break
             counter += 1
         else:
@@ -28,8 +29,15 @@ def split_quotes(text: str) -> List:
 
         # 1 to avoid starting quote, and counter is exclusive so avoids ending
         key = remove_escapes(text[1:counter].strip())
+        
+        #handle html anchor tag(just the start tag) as a filter
+        if text[counter] == TAG_CLOSE:
+            endtag = "</a>"
+            key = "<"+key+">"
+            counter = text.find(endtag, counter+1)+len(endtag)
         # index will be in range, or `else` would have been executed and returned
-        rest = text[counter + 1:].strip()
+        rest = text[counter + 1:]
+        
         if not key:
             key = text[0] + text[0]
         return list(filter(None, [key, rest]))
