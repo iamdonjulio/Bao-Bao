@@ -318,7 +318,7 @@ async def delallconfirm(client, message):
 @Client.on_message(filters.group & filters.text)
 async def give_filter(client,message):
     group_id = message.chat.id
-    name = message.text
+    name = message.text.html
     if(name.startswith("DEBUG:")):
         await message.reply_text(name, quote=True)
 
