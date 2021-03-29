@@ -56,9 +56,6 @@
 * `/info <userid>`  -  Shows User Information. Also use `/info` as reply to some message for their details!
 
 
-
-## Any bugs or errors or suggestions, report at [TroJanzSupport](https://telegram.dog/TroJanzSupport)
-
 ## Credits
 
 <p align="left">
@@ -71,4 +68,10 @@
   <a href="https://docs.mongodb.com">
     <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white"/>
   </a>
+</p>
+
+<p align="left">
+  <a href="https://github.com/TroJanzHEX/Unlimited-Filter-Bot/stargazers">
+    <img src="https://img.shields.io/github/stars/TroJanzHEX/Unlimited-Filter-Bot?style=social">
+   </a>
 </p>
