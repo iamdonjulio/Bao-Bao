@@ -319,13 +319,13 @@ async def delallconfirm(client, message):
 async def give_filter(client,message):
     group_id = message.chat.id
     name = message.text.html
-    if(name.startswith("DEBUG:")):
-        await message.reply_text(name, quote=True)
 
     keywords = await get_filters(group_id)
     for keyword in keywords:
         pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
         if re.search(pattern, name, flags=re.IGNORECASE):
+            if(name.startswith("DEBUG:")):
+                await message.reply_text("Name: "+name+"\nKeyword: "+keyword+"\nPattern: "+pattern, quote=True)
             reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
 
             if reply_text:
