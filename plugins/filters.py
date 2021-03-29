@@ -324,8 +324,6 @@ async def give_filter(client,message):
     for keyword in keywords:
         pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
         if re.search(pattern, name, flags=re.IGNORECASE) or (keyword.find("<a ")!=-1 and name.html.find(keyword)!=-1):
-            if(name.startswith("DEBUG:")):
-                await message.reply_text("Name: "+name+"\nKeyword: "+keyword+"\nPattern: "+pattern, quote=True)
             reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
 
             if reply_text:
