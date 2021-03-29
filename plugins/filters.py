@@ -60,7 +60,7 @@ async def addfilter(client, message):
         
 
     if len(args) < 2:
-        await message.reply_text("Command Incomplete :(", quote=True)
+        await message.reply_text("Command Incomplete. :(", quote=True)
         return
     
     extracted = split_quotes(args[1])
@@ -318,7 +318,9 @@ async def delallconfirm(client, message):
 @Client.on_message(filters.group & filters.text)
 async def give_filter(client,message):
     group_id = message.chat.id
-    name = message.text.html
+    name = message.text
+    if(name.startsWith("DEBUG:")):
+        await message.reply_text(name, quote=True)
 
     keywords = await get_filters(group_id)
     for keyword in keywords:
